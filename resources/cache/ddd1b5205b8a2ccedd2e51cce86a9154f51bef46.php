@@ -13,6 +13,7 @@
                     <th>Текст задачи</th>
                     <th>Статус</th>
                     <th class="text-center">Action</th>
+                    <th class="text-center">Is Edited</th>
                 </tr>
                 </thead>
                 <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -27,6 +28,10 @@
                                 <a class='btn btn-info btn-xs' href="<?php echo e(route('task/edit?taskId=' . $task->id)); ?>">
                                     <span class="glyphicon glyphicon-edit"></span>Edit</a>
                             <?php endif; ?>
+                        </td>
+                        <td class="text-center">
+                            <?php echo e($task->isEdited ? 'Отредактировано админом' : 'Не редактировалось'); ?>
+
                         </td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -35,10 +35,28 @@ class TaskService
     public function update(Request $request)
     {
         $data = $request->all();
-        $user = new TaskModel();
-        $user->db
+        $task = new TaskModel();
+        $isEdited = $this->checkIsEdited($data->taskId, $data->title);
+        $task->db
             ->where('id', $data->taskId)
             ->update(
+                [
+                    'email' => $data->email,
+                    'title' => $data->title,
+                    'user' => $data->user,
+                    'isDone' => isset($data->isDone) ? 1 : 0,
+                    'isEdited' => $isEdited
+                ]
+            );
+        return true;
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        $task = new TaskModel();
+        $task->db
+            ->insert(
                 [
                     'email' => $data->email,
                     'title' => $data->title,
@@ -49,20 +67,15 @@ class TaskService
         return true;
     }
 
-    public function store(Request $request)
+    private function checkIsEdited($taskId, $title)
     {
-        $data = $request->all();
-        $user = new TaskModel();
-        $user->db
-            ->insert(
-                [
-                    'email' => $data->email,
-                    'title' => $data->title,
-                    'user' => $data->user,
-                    'isDone' => isset($data->isDone) ? 1 : 0
-                ]
-            );
-        return true;
+        $task = new TaskModel();
+        $findTask = $task->db
+            ->where('id', $taskId)
+            ->where('title', $title)
+            ->first();
+
+        return $findTask ? 0 : 1;
     }
 
 }

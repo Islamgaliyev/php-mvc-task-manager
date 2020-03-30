@@ -14,6 +14,7 @@
                     <th>Текст задачи</th>
                     <th>Статус</th>
                     <th class="text-center">Action</th>
+                    <th class="text-center">Is Edited</th>
                 </tr>
                 </thead>
                 @foreach($tasks as $task)
@@ -28,6 +29,9 @@
                                 <a class='btn btn-info btn-xs' href="{{route('task/edit?taskId=' . $task->id)}}">
                                     <span class="glyphicon glyphicon-edit"></span>Edit</a>
                             @endif
+                        </td>
+                        <td class="text-center">
+                            {{ $task->isEdited ? 'Отредактировано админом' : 'Не редактировалось' }}
                         </td>
                     </tr>
                 @endforeach
