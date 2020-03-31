@@ -57,7 +57,8 @@ class TaskController extends BaseController
         try {
             // Refactor: This should be checked in middlewares
             if (!Auth::user()) {
-                redirect(route('task/index'));
+                redirect(route('auth/login'));
+                return;
             }
 
             $this->taskUpdateRequestValidator->makeValidation($request);
