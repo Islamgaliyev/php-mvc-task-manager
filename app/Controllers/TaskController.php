@@ -7,9 +7,6 @@ use App\Core\Request;
 use App\Factory\ServiceFactory;
 use App\Factory\ValidatorFactory;
 use App\Helpers\Auth;
-use App\Models\TaskModel;
-
-use voku\helper\Paginator;
 
 class TaskController extends BaseController
 {
@@ -59,7 +56,7 @@ class TaskController extends BaseController
     {
         try {
             // Refactor: This should be checked in middlewares
-            if (!Auth::user()){
+            if (!Auth::user()) {
                 redirect(route('task/index'));
             }
 

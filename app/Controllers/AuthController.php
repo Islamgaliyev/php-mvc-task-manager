@@ -7,7 +7,6 @@ use App\Core\Request;
 use App\Factory\ServiceFactory;
 use App\Factory\ValidatorFactory;
 use App\Helpers\Auth;
-use App\Models\UserModel;
 
 class AuthController extends BaseController
 {
